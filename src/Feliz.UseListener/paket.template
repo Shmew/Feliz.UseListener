@@ -1,5 +1,4 @@
 ﻿type project
-licenseExpression https://github.com/Shmew/Feliz.UseListener/blob/master/LICENSE
 authors Cody Johnson
 description
     React hooks for easy event listener management.
