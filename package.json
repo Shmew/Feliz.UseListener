@@ -1,0 +1,49 @@
+{
+  "name": "feliz.-use-listener",
+  "version": "0.1.0",
+  "description": "React hook for easy event listener management.",
+  "homepage": "https://github.com/Shmew/Feliz.UseListener",
+  "bugs": {
+    "url": "https://github.com/Shmew/Feliz.UseListener/issues/new/choose"
+  },
+  "license": "MIT",
+  "author": "Cody Johnson",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shmew/Feliz.UseListener"
+  },
+  "scripts": {
+    "build": "webpack -p",
+    "compile-demo-raw": "fable-splitter",
+    "publish-docs": "yarn build && node publish.js",
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "react": "^16",
+    "react-dom": "^16",
+    "react-highlight": "^0",
+    "react-markdown": "^4",
+    "source-map-support": "^0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7",
+    "@babel/preset-env": "^7",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0",
+    "babel-loader": "^8",
+    "core-js": "^3",
+    "fable-compiler": "^2",
+    "fable-loader": "^2",
+    "fable-splitter": "^2",
+    "file-loader": "^4",
+    "gh-pages": "^2",
+    "html-webpack-plugin": "^3",
+    "mkdirp": "^0",
+    "react-refresh": "^0",
+    "remotedev": "^0",
+    "resolve-url-loader": "^3",
+    "webpack": "^4",
+    "webpack-cli": "^3",
+    "webpack-dev-server": "^3"
+  },
+  "private": true
+}
