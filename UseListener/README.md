@@ -8,6 +8,10 @@ As well as a more generic `React.useListener.on : string * #Event -> unit` metho
 
 Has *no* bundle size increase.
 
+Accessible via:
+ * `React.useListener` - document 
+ * `React.useWindowListener` - window
+
 A quick look:
 
 ```fs
