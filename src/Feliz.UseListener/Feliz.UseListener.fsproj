@@ -5,6 +5,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PromiseRejectionEvent.fs" />
     <Compile Include="Listener.fs" />
     <None Include="paket.references" />
     <None Include="paket.template" />

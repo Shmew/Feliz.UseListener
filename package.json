@@ -1,6 +1,6 @@
 {
   "name": "feliz.-use-listener",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React hook for easy event listener management.",
   "homepage": "https://github.com/Shmew/Feliz.UseListener",
   "bugs": {
