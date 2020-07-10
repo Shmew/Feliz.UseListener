@@ -303,7 +303,7 @@ let allItems = React.functionComponent(fun (input: {| state: State; dispatch: Ms
                 menuItem "Contributing" [ Urls.UseListener; Urls.Contributing ]
                 menuLabel "Examples"
                 menuItem "Basic" [ Urls.UseListener; Urls.Examples; Urls.Basic ]
-                menuItem "Inline element state styling" [ Urls.UseListener; Urls.Examples; Urls.RefListener ]
+                menuItem "Inline styling" [ Urls.UseListener; Urls.Examples; Urls.RefListener ]
             ]
         ]
     ])
