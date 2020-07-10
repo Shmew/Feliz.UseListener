@@ -3,6 +3,7 @@ namespace Feliz.UseListener
 open Browser.Types
 open Browser.Dom
 open Fable.Core
+open Fable.Core.JsInterop
 open Feliz
 
 [<Erase;RequireQualifiedAccess>]
@@ -10,12 +11,13 @@ module React =
     [<Erase>]
     type useListener =
         static member inline on (eventType: string, action: #Event -> unit) =
-            let action = React.useCallbackRef(action)
-            React.useEffect((fun () ->
+            let listener = React.useCallbackRef(fun () ->
                 let fn = unbox<#Event> >> action
                 document.addEventListener(eventType, fn, false)        
                 React.createDisposable(fun () -> document.removeEventListener(eventType, fn))
-            ), [| eventType :> obj; action :> obj |])
+            )
+            
+            React.useEffect(listener)
 
         static member inline onAbort (action: ProgressEvent -> unit) = useListener.on("abort", action)
         static member inline onAbort (action: UIEvent -> unit) = useListener.on("abort", action)
@@ -115,14 +117,204 @@ module React =
         static member inline onWheel (action: MouseEvent -> unit) = useListener.on("wheel", action)
 
     [<Erase>]
+    type useElementListener =
+        static member inline on (elemRef: IRefValue<#HTMLElement option>, eventType: string, action: #Event -> unit) =
+            let listener = React.useCallbackRef(fun () ->
+                let fn = unbox<#Event> >> action
+                elemRef.current |> Option.iter(fun elem ->
+                    elem.addEventListener(eventType, fn, false)
+                )
+
+                React.createDisposable(fun () -> 
+                    elemRef.current |> Option.iter(fun elem ->
+                        elem.removeEventListener(eventType, fn)
+                ))
+            )
+
+            React.useEffect(listener)
+
+        static member inline onAbort (elemRef: IRefValue<#HTMLElement option>, action: ProgressEvent -> unit) = useElementListener.on(elemRef, "abort", action)
+        static member inline onAbort (elemRef: IRefValue<#HTMLElement option>, action: UIEvent -> unit) = useElementListener.on(elemRef, "abort", action)
+        static member inline onAnimationCancel (elemRef: IRefValue<#HTMLElement option>, action: AnimationEvent -> unit) = useElementListener.on(elemRef, "animationcancel", action)
+        static member inline onAnimationEnd (elemRef: IRefValue<#HTMLElement option>, action: AnimationEvent -> unit) = useElementListener.on(elemRef, "animationend", action)
+        static member inline onAnimationIteration (elemRef: IRefValue<#HTMLElement option>, action: AnimationEvent -> unit) = useElementListener.on(elemRef, "animationiteration", action)
+        static member inline onAnimationStart (elemRef: IRefValue<#HTMLElement option>, action: AnimationEvent -> unit) = useElementListener.on(elemRef, "animationstart", action)
+        static member inline onAuxClick (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "onauxclick", action)
+        static member inline onBlur (elemRef: IRefValue<#HTMLElement option>, action: FocusEvent -> unit) = useElementListener.on(elemRef, "blur", action)
+        static member inline onCancel (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "oncancel", action)
+        static member inline onCanPlay (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "canplay", action)
+        static member inline onCanPlayThrough (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "canplaythrough", action)
+        static member inline onChange (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "change", action)
+        static member inline onClick (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "click", action)
+        static member inline onClose (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "onclose", action)
+        static member inline onContextMenu (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "contextmenu", action)
+        static member inline onCopy (elemRef: IRefValue<#HTMLElement option>, action: ClipboardEvent -> unit) = useElementListener.on(elemRef, "copy", action)
+        static member inline onCueChange (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "oncuechange", action)
+        static member inline onCut (elemRef: IRefValue<#HTMLElement option>, action: ClipboardEvent -> unit) = useElementListener.on(elemRef, "cut", action)
+        static member inline onDblClick (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "dblClick", action)
+        static member inline onDOMContentLoaded (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "DOMContentLoaded", action)
+        static member inline onDrag (elemRef: IRefValue<#HTMLElement option>, action: DragEvent -> unit) = useElementListener.on(elemRef, "drag", action)
+        static member inline onDragEnd (elemRef: IRefValue<#HTMLElement option>, action: DragEvent -> unit) = useElementListener.on(elemRef, "dragend", action)
+        static member inline onDragEnter (elemRef: IRefValue<#HTMLElement option>, action: DragEvent -> unit) = useElementListener.on(elemRef, "dragenter", action)
+        static member inline onDragExit (elemRef: IRefValue<#HTMLElement option>, action: DragEvent -> unit) = useElementListener.on(elemRef, "dragexit", action)
+        static member inline onDragLeave (elemRef: IRefValue<#HTMLElement option>, action: DragEvent -> unit) = useElementListener.on(elemRef, "dragleave", action)
+        static member inline onDragOver (elemRef: IRefValue<#HTMLElement option>, action: DragEvent -> unit) = useElementListener.on(elemRef, "dragover", action)
+        static member inline onDragStart (elemRef: IRefValue<#HTMLElement option>, action: DragEvent -> unit) = useElementListener.on(elemRef, "dragstart", action)
+        static member inline onDrop (elemRef: IRefValue<#HTMLElement option>, action: DragEvent -> unit) = useElementListener.on(elemRef, "drop", action)
+        static member inline onDurationChange (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "durationchange", action)
+        static member inline onEmptied (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "emptied", action)
+        static member inline onEnded (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "ended", action)
+        static member inline onError (elemRef: IRefValue<#HTMLElement option>, action: ProgressEvent -> unit) = useElementListener.on(elemRef, "error", action)
+        static member inline onError (elemRef: IRefValue<#HTMLElement option>, action: UIEvent -> unit) = useElementListener.on(elemRef, "error", action)
+        static member inline onFocus (elemRef: IRefValue<#HTMLElement option>, action: FocusEvent -> unit) = useElementListener.on(elemRef, "focus", action)
+        static member inline onFocusIn (elemRef: IRefValue<#HTMLElement option>, action: FocusEvent -> unit) = useElementListener.on(elemRef, "focusin", action)
+        static member inline onFocusOut (elemRef: IRefValue<#HTMLElement option>, action: FocusEvent -> unit) = useElementListener.on(elemRef, "focusout", action)
+        static member inline onFormData (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "formdata", action)
+        static member inline onFullscreenChange (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "fullscreenchange", action)
+        static member inline onFullscreenError (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "fullscreenerror", action)
+        static member inline onGotPointerCapture (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "gotPointercapture", action)
+        static member inline onInput (elemRef: IRefValue<#HTMLElement option>, action: UIEvent -> unit) = useElementListener.on(elemRef, "input", action)
+        static member inline onInvalid (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "invalid", action)
+        static member inline onKeyDown (elemRef: IRefValue<#HTMLElement option>, action: KeyboardEvent -> unit) = useElementListener.on(elemRef, "keydown", action)
+        static member inline onKeyPress (elemRef: IRefValue<#HTMLElement option>, action: KeyboardEvent -> unit) = useElementListener.on(elemRef, "keypress", action)
+        static member inline onKeyUp (elemRef: IRefValue<#HTMLElement option>, action: KeyboardEvent -> unit) = useElementListener.on(elemRef, "keyup", action)
+        static member inline onLoad (elemRef: IRefValue<#HTMLElement option>, action: ProgressEvent -> unit) = useElementListener.on(elemRef, "load", action)
+        static member inline onLoad (elemRef: IRefValue<#HTMLElement option>, action: UIEvent -> unit) = useElementListener.on(elemRef, "load", action)
+        static member inline onLoadedData (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "loadeddata", action)
+        static member inline onLoadedMetadata (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "loadedmetadata", action)
+        static member inline onLoadEnd (elemRef: IRefValue<#HTMLElement option>, action: ProgressEvent -> unit) = useElementListener.on(elemRef, "loadend", action)
+        static member inline onLoadStart (elemRef: IRefValue<#HTMLElement option>, action: ProgressEvent -> unit) = useElementListener.on(elemRef, "loadstart", action)
+        static member inline onLostPointerCapture (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "lostpointercapture", action)
+        static member inline onMouseDown (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "mousedown", action)
+        static member inline onMouseEnter (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "mouseenter", action)
+        static member inline onMouseLeave (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "mouseleave", action)
+        static member inline onMouseMove (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "mousemove", action)
+        static member inline onMouseOut (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "mouseout", action)
+        static member inline onMouseOver (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "mouseover", action)
+        static member inline onMouseUp (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "mouseup", action)
+        static member inline onPaste (elemRef: IRefValue<#HTMLElement option>, action: ClipboardEvent -> unit) = useElementListener.on(elemRef, "paste", action)
+        static member inline onPause (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "pause", action)
+        static member inline onPlay (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "play", action)
+        static member inline onPlaying (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "playing", action)
+        static member inline onPointerCancel (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "pointercancel", action)
+        static member inline onPointerDown (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "pointerdown", action)
+        static member inline onPointerEnter (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "pointerenter", action)
+        static member inline onPointerLeave (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "pointerleave", action)
+        static member inline onPointerMove (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "pointermove", action)
+        static member inline onPointerOut (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "pointerout", action)
+        static member inline onPointerOver (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "pointerover", action)
+        static member inline onPointerUp (elemRef: IRefValue<#HTMLElement option>, action: PointerEvent -> unit) = useElementListener.on(elemRef, "pointerup", action)
+        static member inline onProgress (elemRef: IRefValue<#HTMLElement option>, action: ProgressEvent -> unit) = useElementListener.on(elemRef, "progress", action)
+        static member inline onRateChange (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "ratechange", action)
+        static member inline onReadyStateChange (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "readystatechange", action)
+        static member inline onReset (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "reset", action)
+        static member inline onResize (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "resize", action)
+        static member inline onScroll (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "scroll", action)
+        static member inline onSeeked (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "seeked", action)
+        static member inline onSeeking (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "seeking", action)
+        static member inline onSelect (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "select", action)
+        static member inline onSelectionChange (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "selectionchange", action)
+        static member inline onSelectStart (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "selectstart", action)
+        static member inline onStalled (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "stalled", action)
+        static member inline onSubmit (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "submit", action)
+        static member inline onSuspend (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "suspend", action)
+        static member inline onTimeUpdate (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "timeupdate", action)
+        static member inline onTouchCancel (elemRef: IRefValue<#HTMLElement option>, action: TouchEvent -> unit) = useElementListener.on(elemRef, "touchcancel", action)
+        static member inline onTouchEnd (elemRef: IRefValue<#HTMLElement option>, action: TouchEvent -> unit) = useElementListener.on(elemRef, "touchend", action)
+        static member inline onTouchMove (elemRef: IRefValue<#HTMLElement option>, action: TouchEvent -> unit) = useElementListener.on(elemRef, "touchmove", action)
+        static member inline onTouchStart (elemRef: IRefValue<#HTMLElement option>, action: TouchEvent -> unit) = useElementListener.on(elemRef, "touchstart", action)
+        static member inline onTransitionCancel (elemRef: IRefValue<#HTMLElement option>, action: TransitionEvent -> unit) = useElementListener.on(elemRef, "transitioncancel", action)
+        static member inline onTransitionEnd (elemRef: IRefValue<#HTMLElement option>, action: TransitionEvent -> unit) = useElementListener.on(elemRef, "transitionend", action)
+        static member inline onTransitionRun (elemRef: IRefValue<#HTMLElement option>, action: TransitionEvent -> unit) = useElementListener.on(elemRef, "transitionrun", action)
+        static member inline onTransitionStart (elemRef: IRefValue<#HTMLElement option>, action: TransitionEvent -> unit) = useElementListener.on(elemRef, "transitionstart", action)
+        static member inline onVisibilityChange (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "visibilitychange", action)
+        static member inline onVolumeChange (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "volumechange", action)
+        static member inline onWaiting (elemRef: IRefValue<#HTMLElement option>, action: Event -> unit) = useElementListener.on(elemRef, "waiting", action)
+        static member inline onWheel (elemRef: IRefValue<#HTMLElement option>, action: MouseEvent -> unit) = useElementListener.on(elemRef, "wheel", action)
+
+    [<Erase>]
+    type useStyle =
+        static member inline onCustom (elemRef: IRefValue<#HTMLElement option>) (styles: IStyleAttribute list) (resolver: #HTMLElement option -> bool) =
+            let isTrue,setIsTrue = React.useState false
+            
+            useElementListener.onChange(elemRef, fun _ ->
+                elemRef.current
+                |> resolver
+                |> setIsTrue
+            )
+
+            React.useMemo((fun () -> 
+                if isTrue then styles
+                else []
+            ), [| isTrue :> obj; styles :> obj |])
+
+        static member inline onClick (elemRef: IRefValue<#HTMLElement option>) (styles: IStyleAttribute list) =
+            let isClicked,setIsClicked = React.useState false
+            
+            useElementListener.onClick(elemRef, fun _ -> setIsClicked (not isClicked))
+            
+            React.useMemo((fun () -> 
+                if isClicked then styles
+                else []
+            ), [| isClicked :> obj; styles :> obj |])
+
+        static member inline onDisabled< ^elem when ^elem :> HTMLElement and ^elem : (member disabled : bool)> (elemRef: IRefValue< ^elem option>) (styles: IStyleAttribute list) =
+            useStyle.onCustom elemRef styles (fun elem ->
+                elem
+                |> Option.map (fun e -> e?disabled)
+                |> Option.defaultValue false
+            )
+
+        static member inline onFocus (elemRef: IRefValue<#HTMLElement option>) (styles: IStyleAttribute list) =
+            let isFocused,setIsFocused = React.useState false
+            
+            useElementListener.onFocusIn(elemRef, fun _ -> setIsFocused true)
+            useElementListener.onFocusOut(elemRef, fun _ -> setIsFocused false)
+
+            React.useMemo((fun () -> 
+                if isFocused then styles
+                else []
+            ), [| isFocused :> obj; styles :> obj |])
+
+        static member inline onHover (elemRef: IRefValue<#HTMLElement option>) (styles: IStyleAttribute list) =
+            let isHovered,setIsHovered = React.useState false
+            
+            useElementListener.onMouseEnter(elemRef, fun _ -> setIsHovered true)
+            useElementListener.onMouseLeave(elemRef, fun _ -> setIsHovered false)
+
+            React.useMemo((fun () -> 
+                if isHovered then styles
+                else []
+            ), [| isHovered :> obj; styles :> obj |])
+
+        static member inline onInvalid< ^elem when ^elem :> HTMLElement and ^elem : (member validity : ValidityState)> (elemRef: IRefValue< ^elem option>) (styles: IStyleAttribute list) =
+            useStyle.onCustom elemRef styles (fun elem ->
+                elem
+                |> Option.map (fun e -> 
+                    JS.console.log(e?validity?valid)
+                    not e?validity?valid)
+                |> Option.defaultValue false
+            )
+
+        static member inline onValid< ^elem when ^elem :> HTMLElement and ^elem : (member validity : ValidityState)> (elemRef: IRefValue< ^elem option>) (styles: IStyleAttribute list) =
+            useStyle.onCustom elemRef styles (fun elem ->
+                elem
+                |> Option.map (fun e -> 
+                    JS.console.log(e?validity?valid)
+                    e?validity?valid)
+                |> Option.defaultValue false
+            )
+
+    [<Erase>]
     type useWindowListener =
         static member inline on (eventType: string, action: #Event -> unit) =
-            let action = React.useCallbackRef(action)
-            React.useEffect((fun () ->
+            let listener = React.useCallbackRef(fun () ->
                 let fn = unbox<#Event> >> action
-                document.addEventListener(eventType, fn, false)        
-                React.createDisposable(fun () -> document.removeEventListener(eventType, fn))
-            ), [| eventType :> obj; action :> obj |])
+                window.addEventListener(eventType, fn, false)        
+                React.createDisposable(fun () -> window.removeEventListener(eventType, fn))
+            )
+            
+            React.useEffect(listener)
         
         static member inline onAbort (action: ProgressEvent -> unit) = useWindowListener.on("abort", action)
         static member inline onAbort (action: UIEvent -> unit) = useWindowListener.on("abort", action)

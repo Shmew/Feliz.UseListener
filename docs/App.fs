@@ -70,7 +70,8 @@ let centeredSpinner =
     ]
 
 let samples = 
-    [ "listener-basic", Samples.Basic.render() ]
+    [ "listener-basic", Samples.Basic.render()
+      "listener-reflistener", Samples.RefListener.render() ]
 
 let githubPath (rawPath: string) =
     let parts = rawPath.Split('/')
@@ -300,8 +301,10 @@ let allItems = React.functionComponent(fun (input: {| state: State; dispatch: Ms
                 menuItem "Installation" [ Urls.UseListener; Urls.Installation ]
                 menuItem "Release Notes" [ Urls.UseListener; Urls.ReleaseNotes ]
                 menuItem "Contributing" [ Urls.UseListener; Urls.Contributing ]
-                menuItem "Example" [ Urls.UseListener; Urls.Examples; Urls.Basic ]
-            ]      
+                menuLabel "Examples"
+                menuItem "Basic" [ Urls.UseListener; Urls.Examples; Urls.Basic ]
+                menuItem "Inline element state styling" [ Urls.UseListener; Urls.Examples; Urls.RefListener ]
+            ]
         ]
     ])
 
@@ -341,6 +344,7 @@ let content = React.functionComponent(fun (input: {| state: State; dispatch: Msg
         | PathPrefix [ Urls.Examples ] (Some res) ->
             match res with
             | [ Urls.Basic ] -> [ "Basic.md" ]
+            | [ Urls.RefListener ] -> [ "RefListener.md" ]
             | _ -> []
             |> fun path -> [ "Examples" ] @ path
         | _ -> []

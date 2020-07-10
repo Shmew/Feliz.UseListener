@@ -6,6 +6,7 @@
   <ItemGroup>
     <Compile Include="Css.fs" />
     <Compile Include="UseListener\Debug.fs" />
+    <Compile Include="UseListener\Examples\RefListener.fs" />
     <Compile Include="UseListener\Examples\Basic.fs" />
   </ItemGroup>
   <ItemGroup>
