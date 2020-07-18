@@ -1,3 +1,7 @@
+### 0.5.0 - Saturday, July 18th, 2020
+* Adjust `React.useListener.onClickAway` custom hook to work with touch events in addition to mouse events
+* Added support for making events passive.
+
 ### 0.4.0 - Saturday, July 18th, 2020
 * Added `React.useListener.onClickAway` custom hook to listen for clicks outside of an element
 
