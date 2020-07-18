@@ -6,8 +6,8 @@ open System.Runtime.CompilerServices
 [<assembly: AssemblyTitleAttribute("Feliz.UseListener")>]
 [<assembly: AssemblyProductAttribute("Feliz.UseListener")>]
 [<assembly: AssemblyDescriptionAttribute("React hook for easy event listener management.")>]
-[<assembly: AssemblyVersionAttribute("0.4.0")>]
-[<assembly: AssemblyFileVersionAttribute("0.4.0")>]
+[<assembly: AssemblyVersionAttribute("0.5.0")>]
+[<assembly: AssemblyFileVersionAttribute("0.5.0")>]
 [<assembly: AssemblyConfigurationAttribute("Release")>]
 [<assembly: InternalsVisibleToAttribute("Feliz.UseListener.Tests")>]
 do ()
@@ -16,7 +16,7 @@ module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "Feliz.UseListener"
     let [<Literal>] AssemblyProduct = "Feliz.UseListener"
     let [<Literal>] AssemblyDescription = "React hook for easy event listener management."
-    let [<Literal>] AssemblyVersion = "0.4.0"
-    let [<Literal>] AssemblyFileVersion = "0.4.0"
+    let [<Literal>] AssemblyVersion = "0.5.0"
+    let [<Literal>] AssemblyFileVersion = "0.5.0"
     let [<Literal>] AssemblyConfiguration = "Release"
     let [<Literal>] InternalsVisibleTo = "Feliz.UseListener.Tests"
