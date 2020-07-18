@@ -10,7 +10,7 @@ Has *no* bundle size increase.
 
 Accessible via:
  * `React.useListener` - document
- * `React.useElementListener` - specific elemeent ref
+ * `React.useElementListener` - specific element ref
  * `React.useWindowListener` - window
 
  ### Typical Event Listeners
