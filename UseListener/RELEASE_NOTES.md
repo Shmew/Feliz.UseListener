@@ -1,5 +1,8 @@
+### 0.4.0 - Saturday, July 18th, 2020
+* Added `React.useListener.onClickAway` custom hook to listen for clicks outside of an element
+
 ### 0.3.0 - Friday, July 10th, 2020
-* Added `React.useStyle.on*` hooks for inline element state styling.
+* Added `React.useStyle.on*` hooks for inline element state styling
 
 ### 0.2.0 - Thursday, July 9th, 2020
 * Fix missing/unsupported document events
