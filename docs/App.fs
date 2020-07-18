@@ -71,6 +71,7 @@ let centeredSpinner =
 
 let samples = 
     [ "listener-basic", Samples.Basic.render()
+      "listener-clickaway", Samples.ClickAway.render()
       "listener-reflistener", Samples.RefListener.render() ]
 
 let githubPath (rawPath: string) =
@@ -303,6 +304,7 @@ let allItems = React.functionComponent(fun (input: {| state: State; dispatch: Ms
                 menuItem "Contributing" [ Urls.UseListener; Urls.Contributing ]
                 menuLabel "Examples"
                 menuItem "Basic" [ Urls.UseListener; Urls.Examples; Urls.Basic ]
+                menuItem "ClickAway" [ Urls.UseListener; Urls.Examples; Urls.ClickAway ]
                 menuItem "Inline styling" [ Urls.UseListener; Urls.Examples; Urls.RefListener ]
             ]
         ]
@@ -344,6 +346,7 @@ let content = React.functionComponent(fun (input: {| state: State; dispatch: Msg
         | PathPrefix [ Urls.Examples ] (Some res) ->
             match res with
             | [ Urls.Basic ] -> [ "Basic.md" ]
+            | [ Urls.ClickAway ] -> [ "ClickAway.md" ]
             | [ Urls.RefListener ] -> [ "RefListener.md" ]
             | _ -> []
             |> fun path -> [ "Examples" ] @ path

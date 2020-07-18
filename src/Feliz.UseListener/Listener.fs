@@ -116,6 +116,15 @@ module React =
         static member inline onWaiting (action: Event -> unit) = useListener.on("waiting", action)
         static member inline onWheel (action: MouseEvent -> unit) = useListener.on("wheel", action)
 
+        /// Invokes the callback when a click event is not within the given element.
+        static member inline onClickAway (elemRef: IRefValue<#HTMLElement option>, callback: MouseEvent -> unit) =
+            useListener.onMouseDown(fun ev ->
+                match elemRef.current with
+                | Some elem when not (elem.contains(unbox ev.target)) ->
+                    callback ev
+                | _ -> ()
+            )
+
     [<Erase>]
     type useElementListener =
         static member inline on (elemRef: IRefValue<#HTMLElement option>, eventType: string, action: #Event -> unit) =

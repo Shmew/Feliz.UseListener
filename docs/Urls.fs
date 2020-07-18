@@ -10,5 +10,6 @@ let [<Literal>] ReleaseNotes = "ReleaseNotes"
 
 // Examples
 let [<Literal>] Basic = "Basic"
+let [<Literal>] ClickAway = "ClickAway"
 let [<Literal>] RefListener = "RefListener"
 

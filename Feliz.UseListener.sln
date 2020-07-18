@@ -64,6 +64,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{40188490-B625-4C3D-9D47-0DA57D3A6236}"
 	ProjectSection(SolutionItems) = preProject
 		public\UseListener\Examples\Basic.md = public\UseListener\Examples\Basic.md
+		public\UseListener\Examples\ClickAway.md = public\UseListener\Examples\ClickAway.md
 		public\UseListener\Examples\RefListener.md = public\UseListener\Examples\RefListener.md
 	EndProjectSection
 EndProject
