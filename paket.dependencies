@@ -7,6 +7,7 @@ group UseListener
 	source https://nuget.org/api/v2
 	source https://api.nuget.org/v3/index.json
 
+    nuget Fable.Browser.Dom ~> 2
     nuget Fable.Core ~> 3
     nuget Feliz ~> 1
     nuget FSharp.Core ~> 4.7 lowest_matching: true
@@ -21,13 +22,10 @@ group Docs
     nuget Fable.SimpleJson ~> 3
     nuget Feliz ~> 1
     nuget Feliz.Markdown ~> 1
-    nuget Feliz.Router ~> 2
     nuget Feliz.UseElmish ~> 1
     nuget FSharp.Core ~> 4.7 lowest_matching: true
     nuget FSharpPlus ~> 1
     nuget Zanaptak.TypedCssClasses ~> 0
-
-    github Zaid-Ajaj/Feliz Feliz.Markdown/Markdown.fs
 
 group Tooling
 	source https://nuget.org/api/v2
@@ -46,7 +44,6 @@ group FakeBuild
 	nuget Fake.Core.ReleaseNotes ~> 5
 	nuget Fake.DotNet.AssemblyInfoFile ~> 5
 	nuget Fake.DotNet.Cli ~> 5
-	nuget Fake.DotNet.FSFormatting ~> 5
 	nuget Fake.DotNet.MSBuild ~> 5
 	nuget Fake.DotNet.Paket ~> 5
 	nuget Fake.IO.FileSystem ~> 5
@@ -56,3 +53,4 @@ group FakeBuild
     nuget FSharp.Json ~> 0
 	nuget FSharpLint.Core ~> 0
     nuget Fantomas ~> 3
+    nuget System.Security.Cryptography.Cng ~> 4

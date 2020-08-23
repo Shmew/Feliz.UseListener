@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Urls.fs" />
+    <Compile Include="Router.fs" />
     <Compile Include="App.fs" />
     <Content Include="index.html" />
     <None Include="paket.references" />

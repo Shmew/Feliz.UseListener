@@ -1,3 +1,7 @@
+### 0.6.0 - Sunday, August 23rd, 2020
+* Update Fable.Browser.Dom depdency to fix breaking change
+* Add support for all event options rather than just passive
+
 ### 0.5.0 - Saturday, July 18th, 2020
 * Adjust `React.useListener.onClickAway` custom hook to work with touch events in addition to mouse events
 * Added support for making events passive.

@@ -5,9 +5,9 @@ open Elmish
 open Feliz
 open Feliz.Markdown
 open Fable.SimpleHttp
-open Feliz.Router
 open Feliz.UseElmish
 open Fable.Core.JsInterop
+open Router
 open Zanaptak.TypedCssClasses
 
 type Bulma = CssClasses<"https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css", Naming.PascalCase>
@@ -384,9 +384,9 @@ let render = React.functionComponent(fun () ->
             prop.children [ main {| state = state; dispatch = dispatch |} ]
         ]
 
-    Router.router [
-        Router.onUrlChanged (UrlChanged >> dispatch)
-        Router.application application
+    React.router [
+        router.onUrlChanged (UrlChanged >> dispatch)
+        router.children application
     ])
 
 ReactDOM.render(render(), document.getElementById "root")
