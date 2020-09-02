@@ -1,3 +1,6 @@
+### 0.6.1 - Tuesday, September 1st, 2020
+* Update dependencies
+
 ### 0.6.0 - Sunday, August 23rd, 2020
 * Update Fable.Browser.Dom depdency to fix breaking change
 * Add support for all event options rather than just passive

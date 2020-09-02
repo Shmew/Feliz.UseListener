@@ -10,7 +10,7 @@ group UseListener
     nuget Fable.Browser.Dom ~> 2
     nuget Fable.Core ~> 3
     nuget Feliz ~> 1
-    nuget FSharp.Core ~> 4.7 lowest_matching: true
+    nuget FSharp.Core ~> 4.7
 
 group Docs
     source https://nuget.org/api/v2
@@ -23,7 +23,7 @@ group Docs
     nuget Feliz ~> 1
     nuget Feliz.Markdown ~> 1
     nuget Feliz.UseElmish ~> 1
-    nuget FSharp.Core ~> 4.7 lowest_matching: true
+    nuget FSharp.Core ~> 4.7
     nuget FSharpPlus ~> 1
     nuget Zanaptak.TypedCssClasses ~> 0
 
@@ -53,4 +53,4 @@ group FakeBuild
     nuget FSharp.Json ~> 0
 	nuget FSharpLint.Core ~> 0
     nuget Fantomas ~> 3
-    nuget System.Security.Cryptography.Cng ~> 4
+    nuget NuGet.Packaging 5.6
