@@ -1,3 +1,6 @@
+### 0.6.2 - Thursday, September 17th, 2020
+* Make Fable.Browser.Dom dependency version more strict
+
 ### 0.6.1 - Tuesday, September 1st, 2020
 * Update dependencies
 
