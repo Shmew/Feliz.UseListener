@@ -10,7 +10,7 @@ group UseListener
     nuget Fable.Browser.Dom >= 2.1
     nuget Fable.Core ~> 3
     nuget Feliz ~> 1
-    nuget FSharp.Core ~> 4.7
+    nuget FSharp.Core >= 4.7
 
 group Docs
     source https://nuget.org/api/v2
