@@ -1,6 +1,5 @@
-version 5.247.4
+version 5.251.0
 
-generate_load_scripts: true
 framework: auto-detect
 
 group UseListener
@@ -10,7 +9,7 @@ group UseListener
     nuget Fable.Browser.Dom >= 2.1
     nuget Fable.Core ~> 3
     nuget Feliz ~> 1
-    nuget FSharp.Core >= 4.7
+    nuget FSharp.Core >= 4.7.2 lowest_matching: true
 
 group Docs
     source https://nuget.org/api/v2
@@ -23,7 +22,7 @@ group Docs
     nuget Feliz ~> 1
     nuget Feliz.Markdown ~> 1
     nuget Feliz.UseElmish ~> 1
-    nuget FSharp.Core ~> 4.7
+    nuget FSharp.Core >= 4.7.2 lowest_matching: true
     nuget FSharpPlus ~> 1
     nuget Zanaptak.TypedCssClasses ~> 0
 
@@ -32,7 +31,7 @@ group Tooling
 	source https://api.nuget.org/v3/index.json
 
 	nuget Fake.IO.FileSystem ~> 5
-	nuget FSharp.Core ~> 4.7 lowest_matching: true
+    nuget FSharp.Core >= 4.7.2 lowest_matching: true
     nuget FSharp.Json ~> 0
 	nuget FSharpLint.Core ~> 0
     nuget Yarnpkg.Yarn ~> 1
@@ -50,6 +49,7 @@ group FakeBuild
     nuget Fake.JavaScript.Yarn ~> 5
 	nuget Fake.JavaScript.Npm ~> 5
 	nuget Fake.Tools.Git ~> 5
+    nuget FSharp.Core ~> 4.7
     nuget FSharp.Json ~> 0
 	nuget FSharpLint.Core ~> 0
     nuget Fantomas ~> 3

@@ -1,3 +1,6 @@
+### 0.6.3 - Wednesday, November 18th, 2020
+* Support FSharp.Core 5.0
+
 ### 0.6.2 - Thursday, September 17th, 2020
 * Make Fable.Browser.Dom dependency version more strict
 
