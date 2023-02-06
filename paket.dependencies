@@ -7,8 +7,8 @@ group UseListener
 	source https://api.nuget.org/v3/index.json
 
     nuget Fable.Browser.Dom >= 2.1
-    nuget Fable.Core ~> 3
-    nuget Feliz ~> 1
+    nuget Fable.Core >= 3
+    nuget Feliz >= 2
     nuget FSharp.Core >= 4.7.2 lowest_matching: true
 
 group Docs
